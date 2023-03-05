@@ -113,7 +113,6 @@ keys = [
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
@@ -122,15 +121,29 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 
     # Apps
+    # browser
     Key(
         [mod], "b",
         lazy.spawn(browser),
         desc="Browser"
     ),
+    # terminal
+    Key(
+        [mod], "Return",
+        lazy.spawn(terminal),
+        desc="Launch terminal"
+    ),
+    # filemanager
     Key(
         [mod], "f",
         lazy.spawn(filemanager),
         desc="Filemanager"
+    ),
+    # Flameshot
+    Key(
+        [mod], "s",
+        lazy.spawn("flameshot gui"),
+        desc="Start Flameshot",
     ),
 
     # Sys
@@ -143,7 +156,7 @@ keys = [
         ["shift"], "alt_l",
         lazy.widget["keyboardlayout"].next_keyboard(),
         desc="Next keyboar layout"
-    )
+    ),
 ]
 
 
@@ -182,10 +195,10 @@ layout_settings = {
 }
 
 layouts = [
-    layout.MonadTall(**layout_settings),
-    layout.Max(**layout_settings),
+    # layout.MonadTall(**layout_settings),
     layout.Columns(**layout_settings),
-    # layout.Stack(num_stacks=2, **layout_settings),
+    layout.Max(**layout_settings),
+    layout.Stack(num_stacks=2, **layout_settings),
     # layout.Bsp(**layout_settings),
     # layout.Matrix(**layout_settings),
     # layout.MonadWide(**layout_settings),
@@ -254,6 +267,9 @@ widgets = [
     ),
     widget.Volume(
         fmt=" Vol: {} ",
+        volume_app="pamixer",
+        volume_down_command="pamixer -d 3",
+        volume_up_command="pamixer -i 3",
     ),
     # widget.BatteryIcon(),
     widget.Battery(

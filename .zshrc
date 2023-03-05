@@ -119,5 +119,5 @@ export PATH=$PATH:/usr/local/go/bin
 # ZSH-syntax-highlighting
 # source /home/st/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-neofetch
-# pfetch
+# neofetch
+pfetch
